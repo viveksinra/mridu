@@ -16,7 +16,7 @@ export const metadata: Metadata = baseMetadata();
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" className={`${inter.variable} ${poppins.variable}`}> 
+		<html lang="en" className={`${inter.variable} ${poppins.variable}`}>
 			<body className="min-h-dvh bg-bg text-text antialiased">
 				<header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-bg/70 border-b border-white/10">
 					<nav className="mx-auto max-w-screen-md flex items-center justify-between px-4 py-3">
