@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { SITE } from "@/content/config";
 
+const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://example.com").replace(/\/$/, "");
+
 export function baseMetadata(): Metadata {
 	const title = `Happy Firstday, ${SITE.honoree.nick} ✨`;
 	const description = `For ${SITE.honoree.fullName} — from your best friend. A tiny surprise site built with love.`;
-	const url = "https://example.com";
+	const url = BASE_URL;
 	const images = [
 		{
 			url: "/og.png",

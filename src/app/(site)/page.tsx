@@ -34,10 +34,10 @@ export default function HomePage() {
 				<Countdown month={SITE.birthdayMonth} day={SITE.birthdayDay} />
 			</div>
 			<div className="mt-8 flex gap-3 flex-wrap items-center justify-center">
-				<a href="#audio" className="btn-primary">Play Surprise Song</a>
-				<Link href="/wishes" className="btn-secondary">Open Wishes</Link>
+				<a href="#audio" className="btn-primary" aria-label="Play surprise song">Play Surprise Song</a>
+				<Link href="/wishes" className="btn-secondary" aria-label="Open wishes page">Open Wishes</Link>
 			</div>
-			<div className="mt-14 w-full max-w-md">
+			<div id="audio" className="mt-14 w-full max-w-md">
 				<AudioPlayer src={SITE.audio.happyBirthday} label="Happy Birthday" />
 			</div>
 		</section>

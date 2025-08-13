@@ -9,6 +9,9 @@ export default function StoryPage() {
 			<p className="text-sm opacity-90 leading-relaxed">
 				{SITE.met} We became best friends and chat a lot on Instagram. You’re doing {SITE.study} — proud of you.
 			</p>
+			<blockquote className="text-sm opacity-80 border-l-2 border-white/20 pl-3">
+				A soft note: Even from one meeting, your kindness stayed with me. Thank you for being you, Mohni.
+			</blockquote>
 		</section>
 	);
 }

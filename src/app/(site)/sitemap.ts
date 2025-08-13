@@ -1,4 +1,4 @@
 export default async function sitemap() {
-	const base = "https://example.com";
+	const base = (process.env.NEXT_PUBLIC_SITE_URL || "https://example.com").replace(/\/$/, "");
 	return ["/", "/story", "/gallery", "/wishes", "/surprise", "/patna"].map((p) => ({ url: base + p }));
 }

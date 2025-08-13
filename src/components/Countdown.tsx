@@ -22,9 +22,11 @@ export default function Countdown({ month, day }: { month: number; day: number }
 		);
 	}
 
+	const targetYear = new Date(state.target).getUTCFullYear();
+
 	return (
 		<div aria-live="polite" className="rounded-xl border border-white/15 bg-white/5 p-4">
-			<p className="text-xs opacity-80">Counting down to August 24 (Asia/Kolkata)</p>
+			<p className="text-xs opacity-80">Counting down to August 24, {targetYear} (Asia/Kolkata)</p>
 			<div className="mt-2 grid grid-cols-4 gap-2 text-center">
 				<Time value={state.days} label="Days" />
 				<Time value={state.hours} label="Hours" />
