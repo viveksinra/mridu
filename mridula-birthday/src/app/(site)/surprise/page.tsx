@@ -5,13 +5,14 @@ import { SITE } from "@/content/config";
 
 export default function SurprisePage() {
 	const downloadPdf = async () => {
-		const blob = new Blob([
-			`Happy Firstday Letter\n\n${SITE.letter}`
-		], { type: "application/pdf" });
-		const url = URL.createObjectURL(blob);
-		const a = document.createElement("a");
-		a.href = url; a.download = "letter.pdf"; a.click();
-		URL.revokeObjectURL(url);
+		const { jsPDF } = await import("jspdf");
+		const doc = new jsPDF();
+		doc.setFontSize(16);
+		doc.text("Happy Firstday Letter", 14, 20);
+		doc.setFontSize(12);
+		const split = doc.splitTextToSize(SITE.letter.trim(), 180);
+		doc.text(split, 14, 32);
+		doc.save("letter.pdf");
 	};
 	return (
 		<section className="py-10 space-y-6">
