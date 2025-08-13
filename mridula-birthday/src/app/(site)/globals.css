@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+	--bg: #0f0b1a;
+	--accent: #ff7eb3;
+	--accent-2: #ffd166;
+	--muted: #c3f0ca;
+	--text: #ffffff;
+}
+
+@theme inline {
+	--color-bg: var(--bg);
+	--color-accent: var(--accent);
+	--color-accent-2: var(--accent-2);
+	--color-muted: var(--muted);
+	--color-text: var(--text);
+}
+
+body { background: var(--bg); color: var(--text); }
+
+.btn-primary { @apply inline-flex items-center justify-center rounded-full bg-accent text-black px-4 py-2 text-sm font-semibold shadow-sm hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent; }
+.btn-secondary { @apply inline-flex items-center justify-center rounded-full border border-white/20 px-4 py-2 text-sm hover:bg-white/10; }
+
+@keyframes gradient-slow { 0%{ filter:hue-rotate(0deg);} 100%{ filter:hue-rotate(60deg);} }
+.animate-gradient-slow { animation: gradient-slow 12s linear infinite; }
+
+@keyframes marquee { 0%{ transform: translateX(0);} 100%{ transform: translateX(-50%);} }
+.animate-marquee { animation: marquee 18s linear infinite; }

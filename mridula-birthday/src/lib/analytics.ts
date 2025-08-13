@@ -1,0 +1,1 @@
+export const isAnalyticsEnabled = () => process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === "1" || process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === "true";
