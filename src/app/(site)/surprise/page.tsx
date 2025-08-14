@@ -16,13 +16,13 @@ export default function SurprisePage() {
 	};
 	return (
 		<section className="py-10 space-y-6">
-			<h1 className="text-2xl font-semibold">Surprise</h1>
+			<h1 className="text-2xl font-semibold text-gradient">Surprise</h1>
 			<div className="space-y-4">
 				<AudioPlayer src={SITE.audio.happyBirthday} label="Happy Birthday" />
 				<AudioPlayer src={SITE.audio.aboutSong} label="About Mridula" />
 			</div>
 			<div>
-				<h2 className="text-lg font-semibold mb-2">Swipe to reveal</h2>
+				<h2 className="text-lg font-semibold mb-2">Scratch to reveal</h2>
 				<ScratchReveal>
 					<p className="text-sm opacity-90 whitespace-pre-line">{SITE.letter}</p>
 				</ScratchReveal>
