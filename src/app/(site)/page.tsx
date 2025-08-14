@@ -4,11 +4,26 @@ import FloatingDecor from "@/components/FloatingDecor";
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
 
 const AudioPlayer = dynamic(() => import("@/components/AudioPlayer"), { ssr: false });
 
 export default function HomePage() {
 	const reduce = useReducedMotion() || (typeof window !== "undefined" && localStorage.getItem("reduce-motion") === "1");
+
+	useEffect(() => {
+		if (reduce) return;
+		if (typeof window === "undefined") return;
+		if (sessionStorage.getItem("did-confetti") === "1") return;
+		(async () => {
+			const { default: confetti } = await import("canvas-confetti");
+			confetti({ particleCount: 80, spread: 70, origin: { y: 0.7 } });
+			confetti({ particleCount: 80, spread: 100, angle: 60, origin: { x: 0, y: 0.7 } });
+			confetti({ particleCount: 80, spread: 100, angle: 120, origin: { x: 1, y: 0.7 } });
+			sessionStorage.setItem("did-confetti", "1");
+		})();
+	}, [reduce]);
+
 	return (
 		<section className="relative min-h-[80svh] flex flex-col items-center justify-center text-center py-16">
 			<div className="absolute inset-0 -z-10 animate-gradient-slow" aria-hidden />

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { useReducedMotion } from "framer-motion";
 
 type Props = { audioRef: React.RefObject<HTMLAudioElement>; playing: boolean };
 
@@ -19,14 +20,16 @@ export default function Visualizer({ audioRef, playing }: Props) {
 	const analyserRef = useRef<AnalyserNode | null>(null);
 	const rafRef = useRef<number | null>(null);
 	const ctxRef = useRef<AudioContextLike | null>(null);
+	const reduce = useReducedMotion() || (typeof window !== "undefined" && localStorage.getItem("reduce-motion") === "1");
 
 	useEffect(() => {
 		if (!playing) return;
 		if (!audioRef.current) return;
+		if (reduce) return;
 		let mounted = true;
 		(async () => {
 			if (!ctxRef.current) {
-				const Ctor = window.AudioContext || window.webkitAudioContext!;
+				const Ctor: typeof AudioContext = (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext) as typeof AudioContext;
 				ctxRef.current = new Ctor() as AudioContextLike;
 			}
 			const ctx = ctxRef.current!;
@@ -69,7 +72,8 @@ export default function Visualizer({ audioRef, playing }: Props) {
 			mounted = false;
 			if (rafRef.current) cancelAnimationFrame(rafRef.current);
 		};
-	}, [playing, audioRef]);
+	}, [playing, audioRef, reduce]);
 
+	if (reduce) return null;
 	return <canvas className="w-full h-16 rounded bg-black/30" ref={canvasRef} aria-hidden />;
 }
