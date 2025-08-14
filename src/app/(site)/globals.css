@@ -1,33 +1,52 @@
 @import "tailwindcss";
 
 :root {
-	--bg: #0f0b1a;
-	--accent: #ff7eb3;
-	--accent-2: #ffd166;
-	--muted: #c3f0ca;
+	--bg-start: #130a1e;
+	--bg-end: #1c0f2b;
+	--accent: #ff8fb1; /* blush */
+	--accent-2: #ffd3e2; /* soft rose */
+	--muted: #e5d0fa; /* lilac */
 	--text: #ffffff;
 }
 
 @theme inline {
-	--color-bg: var(--bg);
+	--color-bg: var(--bg-start);
 	--color-accent: var(--accent);
 	--color-accent-2: var(--accent-2);
 	--color-muted: var(--muted);
 	--color-text: var(--text);
 }
 
-body { background: var(--bg); color: var(--text); }
+/* Romantic aurora/dusk background */
+body {
+	background:
+		radial-gradient(1000px 600px at 10% -10%, rgba(255, 143, 177, 0.18), transparent 60%),
+		radial-gradient(900px 520px at 110% 10%, rgba(229, 208, 250, 0.16), transparent 60%),
+		linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+	color: var(--text);
+}
 
-.btn-primary { @apply inline-flex items-center justify-center rounded-full bg-accent text-black px-4 py-2 text-sm font-semibold shadow-sm hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent; }
-.btn-secondary { @apply inline-flex items-center justify-center rounded-full border border-white/20 px-4 py-2 text-sm hover:bg-white/10; }
+/* Essentials */
+.btn-primary { @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2; background: linear-gradient(90deg, var(--accent), var(--muted)); color: #1b0f25; }
+.btn-primary:hover { filter: brightness(1.05); }
+.btn-secondary { @apply inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-2.5 text-sm; background: rgba(255,255,255,0.05); }
+.btn-secondary:hover { background: rgba(255,255,255,0.08); }
 
-@keyframes gradient-slow { 0%{ filter:hue-rotate(0deg);} 100%{ filter:hue-rotate(60deg);} }
-.animate-gradient-slow { animation: gradient-slow 12s linear infinite; }
+.glass { @apply border border-white/10 backdrop-blur rounded-2xl; background: rgba(255,255,255,0.05); }
+.text-gradient { background: linear-gradient(90deg, var(--accent), var(--muted)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-@keyframes marquee { 0%{ transform: translateX(0);} 100%{ transform: translateX(-50%);} }
+/* Animations */
+@keyframes gradient-slow { 0% { filter: hue-rotate(0deg);} 100% { filter: hue-rotate(50deg);} }
+.animate-gradient-slow { animation: gradient-slow 14s linear infinite; }
+
+@keyframes float-slow { 0%, 100% { transform: translateY(0);} 50% { transform: translateY(-8px);} }
+.float-slow { animation: float-slow 6s ease-in-out infinite; }
+
+@keyframes marquee { 0% { transform: translateX(0);} 100% { transform: translateX(-50%);} }
 .animate-marquee { animation: marquee 18s linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
 	.animate-gradient-slow { animation: none !important; }
 	.animate-marquee { animation-duration: 60s; }
+	.float-slow { animation: none !important; }
 }

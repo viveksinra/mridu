@@ -42,20 +42,27 @@ export default function Visualizer({ audioRef, playing }: Props) {
 			const dataArray = new Uint8Array(bufferLength);
 			const canvas = canvasRef.current!;
 			const c = canvas.getContext("2d")!;
+			let gradient: CanvasGradient | null = null;
 			const render = () => {
 				if (!mounted) return;
 				const w = canvas.clientWidth * devicePixelRatio;
 				const h = canvas.clientHeight * devicePixelRatio;
-				if (canvas.width !== w) canvas.width = w;
-				if (canvas.height !== h) canvas.height = h;
+				if (canvas.width !== w) { canvas.width = w; gradient = null; }
+				if (canvas.height !== h) { canvas.height = h; gradient = null; }
+				if (!gradient) {
+					gradient = c.createLinearGradient(0, 0, 0, h);
+					gradient.addColorStop(0, "#ffd3e2");
+					gradient.addColorStop(1, "#ff8fb1");
+				}
 				analyser.getByteFrequencyData(dataArray);
 				c.clearRect(0, 0, w, h);
-				const barWidth = Math.max(2, Math.floor(w / 40));
-				for (let i = 0; i < 40; i++) {
-					const v = dataArray[Math.floor((i / 40) * bufferLength)] / 255;
+				const bars = 42;
+				const barWidth = Math.max(2, Math.floor(w / (bars + 6)));
+				for (let i = 0; i < bars; i++) {
+					const v = dataArray[Math.floor((i / bars) * bufferLength)] / 255;
 					const bh = v * h * 0.8;
-					c.fillStyle = "#ff7eb3";
-					c.fillRect(i * (barWidth + 2), h - bh, barWidth, bh);
+					c.fillStyle = gradient!;
+					c.fillRect(i * (barWidth + 4), h - bh, barWidth, bh);
 				}
 				rafRef.current = requestAnimationFrame(render);
 			};
