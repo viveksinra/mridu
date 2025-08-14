@@ -19,6 +19,15 @@ export const SITE = {
     Even from one meeting, you became my best friend. Here’s a tiny corner of the web
     just for you. 🎂✨
   `,
+	/* Optional explicit gallery (fallbacks to placeholders below) */
+	gallery: [
+		"/images/placeholders/1.svg",
+		"/images/placeholders/2.svg",
+		"/images/placeholders/3.svg",
+		"/images/placeholders/4.svg",
+		"/images/placeholders/5.svg",
+		"/images/placeholders/6.svg",
+	],
 	galleryPlaceholders: [
 		"/images/placeholders/1.svg",
 		"/images/placeholders/2.svg",
@@ -31,6 +40,11 @@ export const SITE = {
 		happyBirthday: "/audio/hbd.mp3",
 		aboutSong: "/audio/about-mridula.mp3",
 	},
+	timeline: [
+		{ title: "We met in Patna", caption: "Counselling day — one meeting, a thousand memories." },
+		{ title: "M.Tech at Nalanda", caption: "Proud of your dedication and journey." },
+		{ title: "Insta chats", caption: "Where days become lighter and brighter." },
+	],
 } as const;
 
 export type SiteConfig = typeof SITE;
