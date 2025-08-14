@@ -7,14 +7,6 @@ export function baseMetadata(): Metadata {
 	const title = `Happy Firstday, ${SITE.honoree.nick} ✨`;
 	const description = `For ${SITE.honoree.fullName} — from your best friend. A tiny surprise site built with love.`;
 	const url = BASE_URL;
-	const images = [
-		{
-			url: "/og.png",
-			width: 1200,
-			height: 630,
-			alt: title,
-		},
-	];
 	return {
 		title,
 		description,
@@ -23,14 +15,12 @@ export function baseMetadata(): Metadata {
 			title,
 			description,
 			url,
-			images,
 			type: "website",
 		},
 		twitter: {
 			card: "summary_large_image",
 			title,
 			description,
-			images,
 		},
 		icons: {
 			icon: [
